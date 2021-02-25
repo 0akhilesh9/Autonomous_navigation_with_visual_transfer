@@ -1,0 +1,3 @@
+BASE_TASK_CONFIG_PATH: "/home/userone/workspace/bed1/project/code/config_files/pointnav_eval_task.yaml"
+NUM_PROCESSES: 1
+SENSORS: ["RGB_SENSOR", "SEMANTIC_SENSOR", 'DEPTH_SENSOR']

@@ -1,0 +1,62 @@
+
+BASE_TASK_CONFIG_PATH: "/home/userone/workspace/bed1/project/code/config_files/pointnav.yaml"
+DATA_PATH_SET: "/home/userone/workspace/bed1/project/habitat-lab/data/datasets/pointnav/gibson/v1/{split}/{split}.json.gz"
+SCENE_DIR_SET: "/home/userone/workspace/bed1/project/project_data"
+EVAL_CKPT_PATH_DIR: "/home/userone/workspace/bed1/project/tmp/checkpoints"
+CHECKPOINT_FOLDER: "/home/userone/workspace/bed1/project/tmp/checkpoints"
+VIDEO_DIR: "/home/userone/workspace/bed1/project/tmp/video_dir"
+TRAINER_NAME: "ppo"
+ENV_NAME: "NavRLEnv"
+SIMULATOR_GPU_ID: 0
+TORCH_GPU_ID: 0
+VIDEO_OPTION: ["disk"]
+# To evaluate on all episodes, set this to -1
+TEST_EPISODE_COUNT: 10
+NUM_PROCESSES: 1
+#SENSORS: ["RGB_SENSOR", "DEPTH_SENSOR"]
+SENSORS: ["RGB_SENSOR", "SEMANTIC_SENSOR"]
+
+TASK_CONFIG:
+  ENVIRONMENT:
+    ITERATOR_OPTIONS:
+      CYCLE: True
+      GROUP_BY_SCENE: True
+      MAX_SCENE_REPEAT_EPISODES: -1
+      MAX_SCENE_REPEAT_STEPS: 10000
+      NUM_EPISODE_SAMPLE: -1
+      SHUFFLE: True
+      STEP_REPETITION_RANGE: 0.2
+    MAX_EPISODE_SECONDS: 10000000
+    MAX_EPISODE_STEPS: 500
+  DATASET:
+    CONTENT_SCENES: ['*']
+    DATA_PATH: "/home/userone/workspace/bed1/project/project_data/gibson/v1/{split}/{split}.json.gz"
+    SCENES_DIR: "/home/userone/workspace/bed1/project/project_data"
+    SPLIT: train
+    TYPE: PointNav-v1
+  SEED: 100
+  SIMULATOR:
+    AGENT_0:
+      SENSORS: ['RGB_SENSOR']
+#      SENSORS: [ 'SEMANTIC_SENSOR' ]
+
+    RGB_SENSOR:
+      WIDTH: 256
+      HEIGHT: 256
+    DEPTH_SENSOR:
+      WIDTH: 256
+      HEIGHT: 256
+    SEMANTIC_SENSOR:
+      WIDTH: 256
+      HEIGHT: 256
+    HABITAT_SIM_V0:
+      ALLOW_SLIDING: True
+      ENABLE_PHYSICS: False
+      GPU_DEVICE_ID: 0
+      GPU_GPU: False
+
+RL:
+  REWARD_MEASURE: distance_to_goal
+  SLACK_REWARD: -0.01
+  SUCCESS_MEASURE: spl
+  SUCCESS_REWARD: 10.0

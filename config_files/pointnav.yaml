@@ -1,0 +1,38 @@
+ENVIRONMENT:
+  MAX_EPISODE_STEPS: 300
+SIMULATOR:
+  AGENT_0:
+    #SENSORS: ['RGB_SENSOR', 'SEMANTIC_SENSOR']
+    SENSORS: ['SEMANTIC_SENSOR']
+  HABITAT_SIM_V0:
+    GPU_DEVICE_ID: 0
+  RGB_SENSOR:
+    WIDTH: 256
+    HEIGHT: 256
+  DEPTH_SENSOR:
+    WIDTH: 256
+    HEIGHT: 256
+  SEMANTIC_SENSOR:
+    WIDTH: 256
+    HEIGHT: 256
+TASK:
+  TYPE: Nav-v0
+  SUCCESS_DISTANCE: 0.2
+
+  SENSORS: ['POINTGOAL_WITH_GPS_COMPASS_SENSOR']
+  POINTGOAL_WITH_GPS_COMPASS_SENSOR:
+    GOAL_FORMAT: "POLAR"
+    DIMENSIONALITY: 2
+  GOAL_SENSOR_UUID: pointgoal_with_gps_compass
+
+  MEASUREMENTS: ['DISTANCE_TO_GOAL', 'SUCCESS', 'SPL', 'TOP_DOWN_MAP']
+  SPL:
+    TYPE: SPL
+    SUCCESS_DISTANCE: 0.2
+
+DATASET:
+  TYPE: PointNav-v1
+  SPLIT: train
+  #DATA_PATH: "/home/userone/workspace/bed1/project/habitat-lab/data/datasets/pointnav/gibson/v1/{split}/{split}.json.gz"
+  DATA_PATH: "/home/userone/workspace/bed1/project/project_data/gibson/v1/{split}/{split}.json.gz"
+  SCENES_DIR: "/home/userone/workspace/bed1/project/project_data/scene_data"

@@ -1,0 +1,64 @@
+
+EVAL_CKPT_PATH_DIR: "/home/userone/workspace/bed1/project/tmp/checkpoints"
+CHECKPOINT_FOLDER: "/home/userone/workspace/bed1/project/tmp/checkpoints"
+VIDEO_DIR: "/home/userone/workspace/bed1/project/tmp/video_dir"
+TORCH_GPU_ID: 0
+
+RL:
+  PPO:
+    # ppo params
+    clip_param: 0.1
+    ppo_epoch: 4
+    num_mini_batch: 1
+    value_loss_coef: 0.5
+    entropy_coef: 0.01
+    lr: 2.5e-4
+    eps: 1e-08
+    max_grad_norm: 0.5
+    num_steps: 128
+    hidden_size: 512
+    use_gae: True
+    gamma: 0.99
+    tau: 0.95
+    use_linear_clip_decay: True
+    use_linear_lr_decay: True
+    reward_window_size: 50
+
+  DQN:
+    clip_param: 0.1
+    epoch: 4
+    num_mini_batch: 1
+    value_loss_coef: 0.5
+    entropy_coef: 0.01
+    lr: 2.5e-2
+    eps: 1e-5
+    max_grad_norm: 0.5
+    num_steps: 128
+    hidden_size: 512
+    use_gae: True
+    gamma: 0.99
+    tau: 0.95
+    use_linear_clip_decay: True
+    use_linear_lr_decay: True
+    reward_window_size: 50
+    start_eps: 0.9
+    end_eps: 0.5
+    max_random_action_steps: 100
+    train:
+      VIDEO_OPTION: ["disk"]
+      num_episodes: 10
+      max_steps: 300
+      update_frequency: 5
+      out_filename: dqn_train.csv
+      loss_filename: dqn_loss.csv
+    test:
+      VIDEO_OPTION: ["disk"]
+      num_episodes: 10
+      max_steps: 100
+      out_filename: dqn_eval.csv
+    log_interval: 10
+    checkpoint_interval: 50
+    batch_size: 1
+    rnn_seq_len: 2
+    discount_factor: 0.99
+    save_path: "/home/userone/workspace/bed1/project/code/models/trained/dqn.pth"
