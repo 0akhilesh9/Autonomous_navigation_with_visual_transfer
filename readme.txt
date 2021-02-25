@@ -66,5 +66,8 @@ Rosser.glb
 Sands.glb
 
 
+References:
+
+https://github.com/facebookresearch/habitat-lab
 
 https://github.com/facebookresearch/habitat-sim
